@@ -124,7 +124,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # Untuk mengakses file statis (bukan untuk file upload)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [ BASE_DIR / 'static' ]
+STATICFILES_DIRS = []
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = 'sas/admin/alumni/'  # atau ke halaman lain khusus admin
