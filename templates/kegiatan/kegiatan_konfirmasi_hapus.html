@@ -1,0 +1,13 @@
+{% extends 'base2.html' %}
+{% block title %}Hapus Kegiatan{% endblock %}
+{% block content %}
+<div class="max-w-xl mx-auto bg-white p-6 rounded shadow text-center">
+    <h2 class="text-xl font-bold mb-4 text-red-600">Konfirmasi Hapus</h2>
+    <p>Apakah Anda yakin ingin menghapus kegiatan <strong>{{ kegiatan.judul }}</strong>?</p>
+    <form method="post" class="mt-4">
+        {% csrf_token %}
+        <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Ya, Hapus</button>
+        <a href="{% url 'kegiatan_manage' %}" class="ml-4 text-gray-700 hover:underline">Batal</a>
+    </form>
+</div>
+{% endblock %}

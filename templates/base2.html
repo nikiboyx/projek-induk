@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Kegiatan Sekolah{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; }
+        /* Mengatur agar ikon Material Icons sejajar sempurna */
+        .material-icons {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+<aside id="sidebar" class="w-64 bg-orange-600 text-white fixed top-0 left-0 h-full z-40 shadow-xl
+    transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
+    
+    <div class="p-4 text-2xl font-bold border-b border-orange-400 flex items-center">
+        <span class="material-icons mr-3 text-3xl">school</span>
+        <a href="{% url 'kegiatan_home' %}">Kegiatan Sekolah</a>
+    </div>
+    <nav class="p-4 space-y-3 text-sm">
+        <a href="{% url 'kegiatan_home' %}" class="flex items-center hover:bg-orange-500 p-2 rounded transition-colors">
+            <span class="material-icons mr-3">home</span>
+            Beranda
+        </a>
+        {% if request.user.is_authenticated and request.user.is_staff %}
+        <a href="{% url 'kegiatan_manage' %}" class="flex items-center hover:bg-orange-500 p-2 rounded transition-colors">
+            <span class="material-icons mr-3">settings</span>
+            Kelola Kegiatan
+        </a>
+        {% endif %}
+    </nav>
+</aside>
+
+<div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden md:hidden"></div>
+
+<div class="md:ml-64 min-h-screen flex flex-col transition-all duration-300 ease-in-out">
+
+    <header class="bg-white shadow-md h-16 flex justify-between items-center px-4 md:px-6 sticky top-0 z-20">
+        <div class="flex items-center">
+            <button id="sidebar-open-btn-2" class="p-2 mr-2 rounded-full hover:bg-orange-100 md:hidden">
+                <span class="material-icons">menu</span>
+            </button>
+            <h1 class="text-orange-600 font-semibold text-lg flex items-center">
+                <span class="material-icons mr-2 text-xl">event_note</span>
+                Sistem Informasi Kegiatan
+            </h1>
+        </div>
+
+        <div>
+            {% if request.user.is_authenticated %}
+                <form action="{% url 'logout' %}" method="post" class="inline">
+                    {% csrf_token %}
+                    <button class="text-sm bg-orange-600 text-white px-4 py-2 rounded-md hover:bg-orange-700 flex items-center transition-colors">
+                        <span class="material-icons text-sm mr-1">logout</span> Logout
+                    </button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}?next=/kegiatan/admin/manage/" class="text-sm border border-orange-600 text-orange-600 px-4 py-2 rounded-md hover:bg-orange-100 hover:text-orange-700 flex items-center transition-colors">
+                    <span class="material-icons text-sm align-middle mr-1">login</span> Login
+                </a>
+            {% endif %}
+        </div>
+    </header>
+
+    <main class="p-4 md:p-6 flex-grow">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-white text-center py-4 text-sm text-gray-500 border-t">
+        &copy; {% now "Y" %} Kegiatan Sekolah - Didesain dengan ❤️
+    </footer>
+</div>
+
+<script>
+    const sidebar = document.getElementById('sidebar');
+    // Tombol menu di header sudah dihandle oleh sidebar-open-btn-2
+    // const sidebarOpenBtn = document.getElementById('sidebar-open-btn'); 
+    const sidebarOpenBtn2 = document.getElementById('sidebar-open-btn-2');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+    function openSidebar() {
+        sidebar.classList.remove('-translate-x-full');
+        sidebarOverlay.classList.remove('hidden');
+    }
+
+    function closeSidebar() {
+        sidebar.classList.add('-translate-x-full');
+        sidebarOverlay.classList.add('hidden');
+    }
+
+    // sidebarOpenBtn?.addEventListener('click', openSidebar);
+    sidebarOpenBtn2?.addEventListener('click', openSidebar);
+    sidebarOverlay?.addEventListener('click', closeSidebar);
+</script>
+
+</body>
+</html>

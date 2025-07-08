@@ -1,0 +1,27 @@
+{% extends 'base2.html' %}
+{% block title %}{{ judul }}{% endblock %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data" class="bg-white p-6 rounded shadow max-w-2xl mx-auto">
+    {% csrf_token %}
+
+    <div class="mb-4">
+        <label class="block font-semibold mb-1">Judul</label>
+        {{ form.judul }}
+    </div>
+
+    <div class="mb-4">
+        <label class="block font-semibold mb-1">Isi Konten</label>
+        {{ form.isi }}
+    </div>
+
+    <div class="mb-4">
+        <label class="block font-semibold mb-1">Gambar</label>
+        {{ form.gambar }}
+    </div>
+
+    <button type="submit" class="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700">
+        Simpan
+    </button>
+</form>
+{% endblock %}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Portal Sistem Sekolah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-b from-purple-600 to-purple-300 text-white min-h-screen">
+
+<!-- Header -->
+<header class="py-4 px-6 flex justify-between items-center">
+    <div class="space-x-4">
+        <a href="/admin" class="bg-white text-purple-700 px-4 py-2 rounded-full font-semibold hover:bg-purple-100 transition">
+            Masuk sebagai Admin
+        </a>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section class="text-center py-20 px-6">
+    <h2 class="text-4xl font-extrabold mb-4">Selamat Datang di Portal Sekolah</h2>
+    <p class="text-lg text-purple-100 mb-6 max-w-xl mx-auto">
+        Akses berbagai sistem aplikasi sekolah dalam satu portal terpadu.
+    </p>
+</section>
+
+<!-- Fitur Grid -->
+<section class="bg-white text-gray-800 py-16 px-6">
+    <div class="max-w-6xl mx-auto">
+        <h3 class="text-2xl font-bold text-center mb-10">Aplikasi Sekolah</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- SAS (aktif) -->
+            <a href="{% url 'sas_home' %}" class="block bg-gradient-to-br from-purple-400 to-purple-600 text-white rounded-xl p-6 shadow hover:scale-105 transition">
+                <div class="flex items-center justify-between">
+                    <h4 class="text-xl font-semibold">Sistem Alumni</h4>
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path d="M15.75 9V5.25M8.25 9V5.25m0 0A2.25 2.25 0 016.75 3h-1.5A2.25 2.25 0 003 5.25v13.5A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75v-13.5A2.25 2.25 0 0018.75 3h-1.5a2.25 2.25 0 00-2.25 2.25V9"></path>
+                    </svg>
+                </div>
+                <p class="mt-2 text-sm text-white/90">Kelola data alumni dari SD sampai kerja/menikah.</p>
+            </a>
+
+            <!-- Perpustakaan (coming soon) -->
+            <div class="bg-gradient-to-br from-blue-300 to-blue-500 text-white rounded-xl p-6 shadow opacity-80 cursor-not-allowed relative">
+                <div class="flex items-center justify-between">
+                    <h4 class="text-xl font-semibold">Sistem Perpustakaan</h4>
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path d="M3 5.25A2.25 2.25 0 015.25 3h13.5A2.25 2.25 0 0121 5.25v13.5A2.25 2.25 0 0118.75 21H5.25A2.25 2.25 0 013 18.75V5.25z"></path>
+                    </svg>
+                </div>
+                <p class="mt-2 text-sm text-white/90">Manajemen buku, peminjaman, dan katalog digital.</p>
+                <span class="absolute top-2 right-3 text-xs bg-white text-blue-700 px-2 py-1 rounded-full font-bold">Segera Hadir</span>
+            </div>
+
+            <!-- Kegiatan sekolah (coming soon) -->
+            <a href="{% url 'kegiatan_home' %}" class="bg-gradient-to-br from-pink-300 to-pink-500 text-white rounded-xl p-6 shadow opacity-80 hover:scale-105 transition">
+                <div class="flex items-center justify-between">
+                    <h4 class="text-xl font-semibold">Kegiatan Sekolah</h4>
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path d="M12 6v6l4 2"></path>
+                        <path d="M12 3a9 9 0 100 18 9 9 0 000-18z"></path>
+                    </svg>
+                </div>
+                <p class="mt-2 text-sm text-white/90">Informasi kegiatan sekolah dan dokumentasi event.</p>                
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-purple-700 text-center text-sm py-4 mt-10">
+    &copy; 2025 Sistem Terpadu Sekolah
+</footer>
+
+</body>
+</html>

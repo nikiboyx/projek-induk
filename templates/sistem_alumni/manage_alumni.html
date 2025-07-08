@@ -1,0 +1,88 @@
+{% extends 'base1.html' %}
+{% block title %}Kelola Alumni{% endblock %}
+
+{% block content %}
+<div class="flex justify-between items-center mb-6">
+    <h2 class="text-3xl font-bold text-gray-800 flex items-center">
+        <i class="fas fa-users-cog mr-3 text-blue-600"></i>
+        Kelola Data Alumni
+    </h2>
+    <a href="{% url 'alumni_tambah' %}" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center shadow-md">
+        <i class="fas fa-user-plus mr-2"></i>
+        Tambah Alumni
+    </a>
+</div>
+
+<form method="get" class="mb-6 flex items-center space-x-4">
+    <input type="text" name="q" placeholder="Cari nama atau angkatan..."
+           value="{{ request.GET.q }}"
+           class="border rounded px-3 py-2 w-full md:w-1/3 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded flex items-center space-x-2 hover:bg-blue-700">
+        <i class="fas fa-search"></i>
+        <span>Cari</span>
+    </button>
+</form>
+
+<form method="post" action="{% url 'alumni_batch_delete' %}" id="form-hapus-banyak">
+    {% csrf_token %}
+    <div class="overflow-x-auto bg-white rounded-lg shadow border">
+        <table class="w-full table-auto text-sm">
+            <thead class="bg-gray-100 text-gray-700 uppercase text-xs border-b">
+                <tr>
+                    <th class="p-3 text-center"><input type="checkbox" id="check-all" class="form-checkbox"></th>
+                    <th class="p-3 text-left"><i class="fas fa-user mr-1"></i> Nama</th>
+                    <th class="p-3 text-left"><i class="fas fa-graduation-cap mr-1"></i> Angkatan</th>
+                    <th class="p-3 text-left"><i class="fas fa-info-circle mr-1"></i> Status</th>
+                    <th class="p-3 text-center"><i class="fas fa-cogs"></i> Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in alumni %}
+                <tr class="border-b hover:bg-gray-50 transition">
+                    <td class="p-3 text-center">
+                        <input type="checkbox" name="selected_ids" value="{{ a.id }}" class="checkbox-item form-checkbox">
+                    </td>
+                    <td class="p-3">{{ a.nama_lengkap }}</td>
+                    <td class="p-3">{{ a.angkatan }}</td>
+                    <td class="p-3">{{ a.status }}</td>
+                    <td class="p-3 text-center space-x-2">
+                        <a href="{% url 'alumni_edit' a.id %}" class="text-blue-600 hover:text-blue-800" title="Edit">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="{% url 'alumni_hapus' a.id %}" class="text-red-600 hover:text-red-800" title="Hapus">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center py-6 text-gray-500">
+                        <i class="fas fa-info-circle mr-1"></i> Data tidak ditemukan.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mt-5 flex justify-end">
+        <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 flex items-center space-x-2"
+                onclick="return confirm('Yakin ingin menghapus data yang dipilih?')">
+            <i class="fas fa-trash"></i>
+            <span>Hapus Terpilih</span>
+        </button>
+    </div>
+</form>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const checkAll = document.getElementById("check-all");
+    const checkboxes = document.querySelectorAll(".checkbox-item");
+
+    checkAll.addEventListener("change", function () {
+        checkboxes.forEach(cb => cb.checked = this.checked);
+    });
+});
+</script>
+
+{% endblock %}

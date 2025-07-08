@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Admin - Sistem Alumni</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-blue-100 via-blue-200 to-blue-300 min-h-screen flex items-center justify-center">
+
+    <div class="bg-white p-8 rounded shadow-lg w-full max-w-md">
+        <h1 class="text-2xl font-bold text-center text-blue-700 mb-6">Masuk Sebagai Admin</h1>
+
+        {% if form.errors %}
+        <div class="bg-red-100 text-red-700 px-4 py-2 rounded mb-4">
+            Username atau password salah.
+        </div>
+        {% endif %}
+
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="id_username" class="block text-sm font-semibold text-gray-700">Username</label>
+                <input type="text" name="username" autofocus required id="id_username"
+                    class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-300">
+            </div>
+            <div class="mb-6">
+                <label for="id_password" class="block text-sm font-semibold text-gray-700">Password</label>
+                <input type="password" name="password" required id="id_password"
+                    class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-300">
+            </div>
+            <button type="submit"
+                class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
+                Masuk
+            </button>
+        </form>
+
+        <p class="text-center text-sm text-gray-500 mt-6">Hanya untuk pengguna dengan hak admin.</p>
+    </div>
+
+</body>
+</html>
