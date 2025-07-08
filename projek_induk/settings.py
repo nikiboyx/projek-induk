@@ -111,7 +111,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Untuk mengakses file statis (bukan untuk file upload)
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = 'sas/admin/alumni/'  # atau ke halaman lain khusus admin
